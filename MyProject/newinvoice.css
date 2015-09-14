@@ -1,0 +1,19 @@
+﻿#newinvoice
+{
+    font-family:'Times New Roman';
+    width:600px;
+    margin:20px auto;
+}
+#lblinvoicehead
+{
+    text-align:center;
+    display:block;
+    color:teal;
+    font-size:20px;
+}
+#lblfromdate, #lbltodate, #lblcompletedhours, #lblhourlyrate, #lbltotalpay, #lblsow, #lbltimesheet
+{
+    width:50%;
+    margin-right:25px;
+}
+
