@@ -7,6 +7,7 @@
     margin-left: 0;
     margin-right: 0;
     margin-top: 0;
+    text-decoration:none;
 }
 #header
 {
@@ -23,7 +24,6 @@
 form
 {
     width:1300px;
-   
     margin:0 auto;
     background-color:#ffffff;
 }
@@ -31,7 +31,7 @@ div img
 {
     height:40px;
     float:left;
-    margin:0px ;
+    margin:16px 0 0 51px ;
 }
 #Image1
 {
@@ -83,24 +83,24 @@ div h1
     }
 input[type=text], .drop1,input[type=email],input[type=date]
 {
-    width:220px;
-    height:25px;
     border-radius:5px;
-    
+    width:190px;
+    height: 26px;
 }
 textarea
 {
-    width:220px;
+    resize:none;
+    width:190px;
 }
-tr
+#tbl1 tr
 {
-    height:45px;
+   height:45px;
 }
 .csl
 {
     float:left;
 }
-table tr th
+#tbl1 tr th
 {
     font-size:25px;
     height:70px;
@@ -186,10 +186,34 @@ td img {
     height:900px;
     border-style:groove;
 }
-#settings
+#dashboard_setting
 {
     height:30px;
-    border-style:dashed;
+    /*margin-top:20px;*/
+    /*border-style:dashed;*/
+}
+#delete
+{
+    margin-left:1000px;
+    float:left;
+    height:20px;
+    width:50px;
+}
+#setting
+{
+   margin-left:20px;
+   height:20px;
+   width:50px;
+   float:left;
+   /*border-style:groove;*/
+}
+#logout
+{
+    margin-left:20px;
+    height:20px;
+    width:50px;
+    padding:2px;
+    float:left;
 }
 #project_details
 {
@@ -200,11 +224,29 @@ td img {
     border-style:groove;
     border-radius:12px;
 }
+#hours
+{
+    width:300px;
+    height:100px;
+    float:left;
+    margin-left:25px;
+    border-style:groove;
+    border-radius:12px;
+}
+#budget
+{
+    width:300px;
+    height:100px;
+    float:left;
+    margin-left:630px;
+    border-style:groove;
+    border-radius:12px;
+}
 #barchart
 {
    float:left;
    width:380px;
-   height:300px;
+   height:350px;
    margin-top:10px;
    margin-left:25px;
    border-style:groove;
@@ -214,7 +256,7 @@ td img {
 {
    float:left;
    width:400px;
-   height:300px;
+   height:350px;
    margin-top:10px;
    margin-left:25px;
    border-style:groove;
@@ -226,7 +268,7 @@ td img {
  width:400px;
  margin-top:10px;
  margin-left:25PX;
- height:300px;
+ height:350px;
  border-style:groove;
  border-radius:12px;
 }
@@ -240,28 +282,55 @@ td img {
     height:40px;
     border-style:groove;
 }
+#project_heading
+{
+    height:20px;
+    background-color:#cccccc;
+}
+#chart_heading
+{
+    height:20px;
+    background-color:#cccccc;
+}
+#pending_heading
+{
+    height:20px;
+    background-color:#cccccc;
+}
+#update_heading
+{
+    height:20px;
+    background-color:#cccccc;
+}
 #sort_dropdown
 {
     float:left;
-    margin:6px 6px;
+    margin:8px 6px;
     width:170px;
     height:20px;
-    border-style:groove;
+    /*border-style:groove;*/
 }
 #project_gridview
 { 
+    margin-left:1px;
  }
 #new_project
 {
-
+    float:left;
+    margin-left:550px;
+    margin-top:8px;
+    width:120px;
+    height:20px;
+    /*border-style:groove;
+    border-radius:12px;*/
 }
 #search
 {
     float:right;
-    margin:4px 6px;
+    margin:8px 8px;
     width:253px;
     height:24px;
-    border-style:groove;
+    /*border-style:groove;*/
 }
 .suggestions
 {
@@ -282,11 +351,18 @@ td img {
     height: auto;
     word-wrap: break-word;
     }
+/*start settings*/
 
-/*new project*/
+.tab
+{
+    padding-top:10px;
+}
+    .tab td
+    {
+        width:69px;
+        height:39px;
 
-
-/*settings*/
+    }
 
 .setting
 {
@@ -298,6 +374,10 @@ td img {
     margin:0 auto;
     
 }
+    .setting input[type=button]
+    {
+        float:right;
+    }
 .settingtop img
 {
     margin:10px 0 0 20px;
@@ -329,3 +409,8 @@ h2
     margin-left:205px;
     width:80px;
 }
+#label1,#label2,#label3,#label4
+{
+    font-size:20px;
+}
+/*End settings*/

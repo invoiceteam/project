@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Edit.aspx.cs" Inherits="Edit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-     <script src="js/jquery-1.11.0.js"></script>
+    <script src="js/jquery-1.11.0.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
     </script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
@@ -10,21 +10,10 @@
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
         rel="Stylesheet" type="text/css" />
     <link href="Styles1.css" rel="stylesheet" />
-   <script type="text/javascript">
-       $(function () {
-
-           $(".pick1").datepicker();
-           $(".pick").datepicker();
-       });
-
-
-
-</script>
-     
    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-     <div class="tabl">
+    <div class="tabl">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
   <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
@@ -63,9 +52,6 @@
      <tr><td >Technology</td>
          <td>
              <asp:DropDownList CssClass="drop1" AutoPostBack="true" ID="dropdown" runat="server">
-                 <asp:ListItem Value="" Text="<-- Select Technology -->"></asp:ListItem>
-                 <asp:ListItem Text="Ektron"></asp:ListItem>
-                 <asp:ListItem Text="Sharepoint"></asp:ListItem>
              </asp:DropDownList>
             </td>
          <td>
@@ -113,9 +99,19 @@
          <td>
              &nbsp;</td>
      </tr>
-     <tr><td class="auto-style1">SOW</td><td><asp:FileUpload runat="server" ID="sowupload" /></td>
+     
+      <tr>
+         <td>Project Status</td>
          <td>
-             &nbsp;</td></tr>
+             <asp:DropDownList ID="status" CssClass="drop1 drop2" AutoPostBack="True" runat="server" >
+                
+                 <asp:ListItem Text="In progress" Value="0"></asp:ListItem>
+                 <asp:ListItem Text="Completed" Value="1"></asp:ListItem>
+                  
+             </asp:DropDownList>
+
+         </td>
+     </tr>
      <tr><td ></td>
          <td>
             
@@ -123,6 +119,7 @@
               <asp:Button ID="Button1" CssClass="cancel"  Text="Cancel" runat="server" OnClick="Button1_Click"  />
          </td>
      </tr>
+    
  
 </table>
    </ContentTemplate>
@@ -138,6 +135,7 @@
 
         function afterAsycUpdate() {
             pageEvents();
+            datepicker();
         }
     </script>
 </asp:Content>
