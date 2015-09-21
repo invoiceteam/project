@@ -10,24 +10,7 @@
         type="text/javascript"></script>
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
         rel="Stylesheet" type="text/css" />
-    <link href="Styles1.css" rel="stylesheet" />
-   
 
-    <style type="text/css">
-        .auto-style3
-        {
-            width: 175px;
-        }
-        .auto-style4
-        {
-            width: 246px;
-        }
-        .auto-style5
-        {
-            width: 262px;
-        }
-    </style>
-   
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -45,14 +28,14 @@
                         <tr>
                             <td class="auto-style3">Project Name</td>
                             <td class="auto-style5">
-                                <asp:TextBox ID="TextBox2" placeholder="Project name" runat="server"></asp:TextBox></td>
+                                <asp:TextBox ID="txtprojectname" placeholder="Project name" runat="server"></asp:TextBox></td>
                             <td>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Project Name is Empty" ControlToValidate="TextBox2" ForeColor="Red"></asp:RequiredFieldValidator></td>
+                                <asp:RequiredFieldValidator ID="rqdvalidator" runat="server" ErrorMessage="Project Name is Empty" ControlToValidate="txtprojectname" ForeColor="Red"></asp:RequiredFieldValidator></td>
                         </tr>
                         <tr>
                             <td class="auto-style3">Type of Project</td>
                             <td class="auto-style5">
-                                <asp:DropDownList ID="DropDownList2" CssClass="drop1 drop2" AutoPostBack="True" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" onchange>
+                                <asp:DropDownList ID="ddltype" CssClass="drop1 drop2" AutoPostBack="True" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" onchange>
                                     <asp:ListItem Value="" Text="<-- Select the project type -->"></asp:ListItem>
 
 
@@ -63,23 +46,22 @@
                         <tr>
                             <td class="auto-style3">Project Description</td>
                             <td class="auto-style5">
-                                <asp:TextBox ID="desc" CssClass="desc" runat="server" TextMode="MultiLine" Height="80px"></asp:TextBox></td>
+                                <asp:TextBox ID="txtdesc" CssClass="desc" runat="server" TextMode="MultiLine" Height="80px"></asp:TextBox></td>
                         </tr>
 
                         <tr>
                             <td class="auto-style3">Technology</td>
                             <td class="auto-style5">
-                                <asp:DropDownList CssClass="drop1" ID="dropdown" runat="server">
+                                <asp:DropDownList CssClass="drop1" ID="ddltech" runat="server">
                                    
                                 </asp:DropDownList>
                             </td>
                             <td>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="Please select the technology" ControlToValidate="dropdown" ForeColor="Red"></asp:RequiredFieldValidator></td>
+                                <asp:RequiredFieldValidator ID="rqdtech" runat="server" ErrorMessage="Please select the technology" ControlToValidate="ddltech" ForeColor="Red"></asp:RequiredFieldValidator></td>
                         </tr>
                         <tr>
                             <td class="auto-style3">Point of Contact</td>
-                            <%-- <td style="width: 305px"><asp:TextBox ID="text1" runat="server" placeholder="name"></asp:TextBox></td>
-        <td><asp:TextBox ID="TextBox3" runat="server" placeholder="Email id"></asp:TextBox></td>--%>
+                           
                             <td class="auto-style5">
                                 <input type="text" placeholder="name" name="pocName[]"></td>
                             <td>
@@ -93,10 +75,7 @@
                         <tr>
                             <td class="auto-style3">Period Of Invoice</td>
                             <td class="auto-style5">
-                                <asp:DropDownList ID="DropDownList1" CssClass="drop1" runat="server">
-                                    <asp:ListItem Text="<-- Select Period of Invoice-->"></asp:ListItem>
-
-
+                                <asp:DropDownList ID="ddlpoi" CssClass="drop1" runat="server">
                                 </asp:DropDownList>
 
                             </td>
@@ -104,57 +83,56 @@
                         <tr>
                             <td class="auto-style3">Finance Assignee</td>
                             <td class="auto-style5">
-                                <asp:DropDownList ID="DropDownList3" CssClass="drop1" runat="server">
+                                <asp:DropDownList ID="ddlfinanance" CssClass="drop1" runat="server">
                                     <asp:ListItem Value="" Text="<-- Select Assignee name-->"></asp:ListItem>
                                     
                                 </asp:DropDownList>
                             </td>
                             <td>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Select the assignee name" ControlToValidate="DropDownList3" ForeColor="Red"></asp:RequiredFieldValidator></td>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Select the assignee name" ControlToValidate="ddlfinanance" ForeColor="Red"></asp:RequiredFieldValidator></td>
                         </tr>
                         <tr>
                             <td class="auto-style3">Start Date</td>
                             <td class="auto-style5">
-                                <asp:TextBox ID="start" TextMode="Date" CssClass="pick1" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtstart" TextMode="Date" CssClass="pick1" runat="server"></asp:TextBox>
                                 <a href="javascript:void(0);" id='a2'>
-                                    <img src="images/file_edit.png" class="fileedit" />
-
-                                </a>
-                            </td>
+                                    &nbsp;</a></td>
                         </tr>
                         <tr>
                             <td class="auto-style3">End Date</td>
                             <td class="auto-style5">
-                                <asp:TextBox ID="enddate" TextMode="Date" CssClass="pick" runat="server"></asp:TextBox>
-                                <a href="javascript:void(0);" id='a1'>
-
-                                    <img src="images/file_edit.png" class="fileedit" /></a>
-
-                            </td>
+                                <asp:TextBox ID="txtenddate" TextMode="Date" CssClass="pick" runat="server"></asp:TextBox>
+                                &nbsp;</td>
                         </tr>
                         <tr>
                             <td class="auto-style3">Total Hours</td>
                             <td class="auto-style5">
-                                <asp:TextBox ID="thours" CssClass="thours" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtthours" CssClass="thours" runat="server"></asp:TextBox>
                                 <a href="javascript:void(0);" id='a3'>
-                                    <img src="images/file_edit.png" class="fileedit" />
-                                </a>
-                            </td>
+                                    &nbsp;</a></td>
                         </tr>
 
                         <tr>
                             <td class="auto-style3">Hourly Rate</td>
                             <td class="auto-style5">
-                                <asp:TextBox ID="rate" CssClass="rate1" runat="server"></asp:TextBox></td>
+                                <asp:TextBox ID="txtrate" CssClass="rate1" runat="server"></asp:TextBox></td>
                             <td>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="please enter the hourly rate" ControlToValidate="rate" ForeColor="Red"></asp:RequiredFieldValidator></td>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="please enter the hourly rate" ControlToValidate="txtrate" ForeColor="Red"></asp:RequiredFieldValidator></td>
+                        </tr>
+                        <tr>
+                              <td class="auto-style3">No of Resources</td>
+                            <td class="auto-style5">
+                               <asp:TextBox ID="txtresources" CssClass="thours"  runat="server"></asp:TextBox>
+                               <a href="javascript:void(0);" id='a1'>
+                                 </a></td>
+
                         </tr>
                         <tr>
                             <td class="auto-style3">SOW</td>
                             <td class="auto-style5">
                                 <asp:FileUpload runat="server" AllowMultiple="false" ID="sowupload" /></td>
                             <td>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="sowupload" ErrorMessage="Please attach the SOW file" ForeColor="Red"></asp:RequiredFieldValidator>
+                                <asp:RequiredFieldValidator ID="rfvsow" runat="server" ControlToValidate="sowupload" ErrorMessage="Please attach the SOW file" ForeColor="Red"></asp:RequiredFieldValidator>
                             </td>
                         </tr>
                         <tr>
@@ -169,7 +147,7 @@
                     </table>
                 </ContentTemplate>
                 <Triggers>
-                    <asp:AsyncPostBackTrigger ControlID="DropDownList2" EventName="SelectedIndexChanged" />
+                    <asp:AsyncPostBackTrigger ControlID="ddltype" EventName="SelectedIndexChanged" />
                     <asp:PostBackTrigger ControlID="btnsubmit" />
                 </Triggers>
             </asp:UpdatePanel>

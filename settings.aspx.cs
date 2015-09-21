@@ -38,7 +38,7 @@ public partial class settings : System.Web.UI.Page
             periodinvoice.DataTextField = "period_of_invoice";
             periodinvoice.DataValueField = "period_of_invoice";
             periodinvoice.DataBind();
-
+            periodinvoice.Items.Insert(0, new ListItem("--Select period of invoice--", "0"));
 
 
 
@@ -48,72 +48,78 @@ public partial class settings : System.Web.UI.Page
                 SqlDataAdapter adapt = new SqlDataAdapter(poc, con);
                 DataTable type1 = new DataTable();
                 adapt.Fill(type1);
-                tpesofproject.DataSource = type1;
-                typesofproject.DataSource = type1;
-                tpesofproject.DataTextField = "type";
-                tpesofproject.DataValueField = "type";
-                typesofproject.DataTextField = "type";
-                typesofproject.DataValueField = "id";
-                typesofproject.DataBind();
-                tpesofproject.DataBind();
-
+                ddltpesofproject.DataSource = type1;
+                ddltypesofproject.DataSource = type1;
+                ddltpesofproject.DataTextField = "type";
+                ddltpesofproject.DataValueField = "type";
+                ddltypesofproject.DataTextField = "type";
+                ddltypesofproject.DataValueField = "id";
+                ddltypesofproject.DataBind();
+                ddltpesofproject.DataBind();
+                ddltpesofproject.Items.Insert(0, new ListItem("--Types of projects--", "0"));
+            
             string cmd = "select technology from technology";
 
             SqlDataAdapter adpt = new SqlDataAdapter(cmd, con);
             DataTable dt = new DataTable();
             adpt.Fill(dt);
-            dropdown.DataSource = dt;
-            dropdown.DataTextField = "technology";
-            dropdown.DataValueField = "technology";
-            dropdown.DataBind();
-
+            ddltechnology.DataSource = dt;
+            ddltechnology.DataTextField = "technology";
+            ddltechnology.DataValueField = "technology";
+            ddltechnology.DataBind();
+            ddltechnology.Items.Insert(0, new ListItem("--Select remove technology--", "0"));
             string type = "select type from type_of_project";
             SqlDataAdapter adpt1 = new SqlDataAdapter(type, con);
             DataTable dwt = new DataTable();
             adpt1.Fill(dwt);
-            DropDownList1.DataSource = dwt;
-            DropDownList1.DataTextField = "type";
-            DropDownList1.DataValueField = "type";
-            DropDownList1.DataBind();
-
-            //string poi = "select period_of_invoice from period_of_invoice";
-
-            //SqlDataAdapter poc1 = new SqlDataAdapter(poi, con);
-            //DataTable dat = new DataTable();
-            //poc1.Fill(dat);
-            //DropDownList2.DataSource = dat;
-            //DropDownList2.DataTextField = "period_of_invoice";
-            //DropDownList2.DataValueField = "period_of_invoice";
-            //DropDownList2.DataBind();
+            ddlremovetype.DataSource = dwt;
+            ddlremovetype.DataTextField = "type";
+            ddlremovetype.DataValueField = "type";
+            ddlremovetype.DataBind();
+            ddlremovetype.Items.Insert(0, new ListItem("--Select remove project--", "0"));
+            
 
 
         }
     }
 
-    protected void Button7_Click(object sender, EventArgs e)
+    protected void btnsubmit_Click(object sender, EventArgs e)
     {
+       
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["connect"].ConnectionString;
+            con.Open();
+            string query = "select pwd from user_details where emp_id="+Session["empid"];
+            SqlCommand squery = new SqlCommand(query, con);
+            var j=squery.ExecuteScalar().ToString();
+            var k = txtoldpassword.Text.ToString();
+            if (j == k)
+            {
+                SqlCommand cmd = new SqlCommand(" UPDATE user_details SET pwd=@password where pwd=@old and emp_id=" + Session["empid"], con);
 
-        SqlConnection con = new SqlConnection();
-        con.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["connect"].ConnectionString;
-        con.Open();
-        SqlCommand cmd = new SqlCommand(" UPDATE user_details SET pwd=@password where pwd=@old", con);
 
-
-        cmd.Parameters.AddWithValue("@password", TextBox3.Text);
-        cmd.Parameters.AddWithValue("@old", TextBox1.Text);
-        cmd.ExecuteNonQuery();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Successfully change password')", true);
-        con.Close();
+                cmd.Parameters.AddWithValue("@password", txtconfirmpwd.Text);
+                cmd.Parameters.AddWithValue("@old", txtoldpassword.Text);
+                cmd.ExecuteNonQuery();
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Successfully change password')", true);
+            }
+            else
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Old password should be match so please give correct password')", true);
+               
+            }
+                con.Close();
+           
     }
-    protected void Button1_Click(object sender, EventArgs e)
+    protected void btntech_Click(object sender, EventArgs e)
     {
         SqlConnection con = new SqlConnection();
         con.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["connect"].ConnectionString;
         con.Open();
-       if (!string.IsNullOrWhiteSpace(TextBox4.Text))
+        if (!string.IsNullOrWhiteSpace(txttechnology.Text))
        {
            SqlCommand cmd = new SqlCommand("INSERT INTO technology (technology) VALUES (@technology)", con);
-           cmd.Parameters.AddWithValue("@technology", TextBox4.Text);
+           cmd.Parameters.AddWithValue("@technology", txttechnology.Text);
 
            cmd.ExecuteNonQuery();
            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Technology added Successfully')", true);
@@ -126,29 +132,37 @@ public partial class settings : System.Web.UI.Page
         }
         con.Close();
     }
-    protected void Button2_Click(object sender, EventArgs e)
+    protected void btnremovetech_Click(object sender, EventArgs e)
     {
         SqlConnection con = new SqlConnection();
         con.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["connect"].ConnectionString;
         con.Open();
-        SqlCommand cmd = new SqlCommand("DELETE FROM technology WHERE technology=@technology", con);
+        if (ddltechnology.SelectedItem.ToString() == "--Select remove technology--")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Please select the technology')", true);
+        }
+        else
+        {
+
+            SqlCommand cmd = new SqlCommand("DELETE FROM technology WHERE technology=@technology", con);
 
 
-        cmd.Parameters.AddWithValue("@technology", dropdown.Text);
+            cmd.Parameters.AddWithValue("@technology", ddltechnology.Text);
 
-        cmd.ExecuteNonQuery();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Technology removed Successfully')", true);
+            cmd.ExecuteNonQuery();
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Technology removed Successfully')", true);
+        }
         con.Close();
     }
-    protected void Button3_Click(object sender, EventArgs e)
+    protected void btntype_Click(object sender, EventArgs e)
     {
         SqlConnection con = new SqlConnection();
         con.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["connect"].ConnectionString;
         con.Open();
-        if (!string.IsNullOrWhiteSpace(TextBox5.Text))
+        if (!string.IsNullOrWhiteSpace(txtaddtype.Text))
        {
         SqlCommand cmd = new SqlCommand("INSERT INTO type_of_project (type) VALUES (@type)", con);
-        cmd.Parameters.AddWithValue("@type", TextBox5.Text);
+        cmd.Parameters.AddWithValue("@type", txtaddtype.Text);
         cmd.ExecuteNonQuery();
         ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Types of project added Successfully')", true);
 
@@ -160,22 +174,29 @@ public partial class settings : System.Web.UI.Page
          }
         con.Close();
     }
-    protected void Button4_Click(object sender, EventArgs e)
+    protected void btnremovetype_Click(object sender, EventArgs e)
     {
         SqlConnection con = new SqlConnection();
         con.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["connect"].ConnectionString;
         con.Open();
-        SqlCommand cmd = new SqlCommand("DELETE FROM type_of_project WHERE type=@type", con);
-        cmd.Parameters.AddWithValue("@type", DropDownList1.Text);
-        cmd.ExecuteNonQuery();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Removed Successfully')", true);
+        if (ddlremovetype.SelectedItem.ToString() == "--Select remove project--")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Please select the project type')", true);
+        }
+        else
+        {
+            SqlCommand cmd = new SqlCommand("DELETE FROM type_of_project WHERE type=@type", con);
+            cmd.Parameters.AddWithValue("@type", ddlremovetype.Text);
+            cmd.ExecuteNonQuery();
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Removed Successfully')", true);
+        }
         con.Close();
     }
 
 
     protected void typesofproject_SelectedIndexChanged(object sender, EventArgs e)
     {
-        String qry = "select period_of_invoice  from invoice_period   where id=" + typesofproject.SelectedValue;
+        String qry = "select period_of_invoice  from invoice_period   where id=" + ddltypesofproject.SelectedValue;
         SqlDataAdapter adpt = new SqlDataAdapter(qry, ConfigurationManager.ConnectionStrings["connect"].ConnectionString);
         DataTable dt = new DataTable();
         adpt.Fill(dt);
@@ -198,7 +219,7 @@ public partial class settings : System.Web.UI.Page
 
 
         cmd.Parameters.AddWithValue("@period_of_invoice", txtnewinvoice.Text);
-        cmd.Parameters.AddWithValue("@id", typesofproject.SelectedValue);
+        cmd.Parameters.AddWithValue("@id", ddltypesofproject.SelectedValue);
         cmd.ExecuteNonQuery();
          ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Period of invoice added Successfully')", true);
             
@@ -216,15 +237,27 @@ public partial class settings : System.Web.UI.Page
         SqlConnection con = new SqlConnection();
         con.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["connect"].ConnectionString;
         con.Open();
-        SqlCommand cmd = new SqlCommand("DELETE FROM invoice_period WHERE period_of_invoice=@period_of_invoice", con);
-        cmd.Parameters.AddWithValue("@period_of_invoice", periodinvoice.SelectedValue);
-        cmd.ExecuteNonQuery();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Removed Successfully')", true);
+        if (periodinvoice.SelectedItem.ToString() == "--Select period of invoice--")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Please select the period of invoice')", true);
+        }
+        else
+        {
+            SqlCommand cmd = new SqlCommand("DELETE FROM invoice_period WHERE period_of_invoice=@period_of_invoice", con);
+            cmd.Parameters.AddWithValue("@period_of_invoice", periodinvoice.SelectedValue);
+            cmd.ExecuteNonQuery();
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Removed Successfully')", true);
+        }
         con.Close();
     }
 
     protected void reload_Click(object sender, EventArgs e)
     {
         Response.Write(Request.RawUrl.ToString());
+    }
+   
+    protected void imbback_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("Dashboard.aspx?ID=" + Request.QueryString["ID"]);
     }
 }

@@ -1,0 +1,33 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+<link href="css/Styles.css" rel="stylesheet" />
+<%@ Register Src="~/header.ascx" TagPrefix="uc1" TagName="header" %>
+<%@ Register Src="~/footer.ascx" TagPrefix="uc1" TagName="footer" %>
+
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+     
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" autocomplete="off" runat="server">
+        <div id="header">
+        <uc1:header runat="server" ID="header1" />
+        </div>
+
+        <div>
+            <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+            </asp:ContentPlaceHolder>
+        </div>
+        <div id="footer1">
+            <uc1:footer runat="server" ID="footer" />
+        </div>
+    </form>
+</body>
+</html>
