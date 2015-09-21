@@ -3,8 +3,8 @@
 <%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-     <script type="text/javascript" src="jquery-1.11.3.js"></script>
-    <script type="text/javascript" src="JavaScript.js"></script>
+     <script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/JavaScript.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
      <asp:ScriptManager ID="ScriptManager1" runat="server">
@@ -13,11 +13,13 @@
         <ContentTemplate>
     <div id="dashboard_layout">
         <div id="dashboard_setting">
+             <div id="deletedash">
+                 </div>
             <div id="setting">
-              <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/images/seettings.png" Height="30px" />
+              <asp:ImageButton ID="imbsettings" OnClick="Imgsettings1_Click" runat="server" ImageUrl="~/images/seettings.png" Height="30px" />
             </div>
             <div id="logout">
-              <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/images/logout.jpg" Height="25px" />
+              <asp:ImageButton ID="imblogout" runat="server" OnClick="logout" ImageUrl="~/images/logout.jpg" Height="25px" />
             </div>
         </div>
         <div id="project_details">
@@ -27,96 +29,81 @@
             </div>
             <div id="project_settings">
                 <div id="sort_dropdown">
-                    <asp:DropDownList ID="dwnproject" ClientIDMode="Static" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged1" >
-                        <asp:ListItem Value="1">Current project details</asp:ListItem>
-                        <asp:ListItem Value="0">Completed project details</asp:ListItem>
+                    <asp:DropDownList ID="ddldwnproject" ClientIDMode="Static" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged1" >
+                        <asp:ListItem Value="0">Current project details</asp:ListItem>
+                        <asp:ListItem Value="1">Completed project details</asp:ListItem>
                     </asp:DropDownList>
                 </div>
+                <div id="btnabort1">
+                    <asp:Button runat="server" ClientIDMode="Static" Text="Abandoned projects" ID="btnabort" OnClick="btnabort_Click" />
+                </div>
                 <div id="new_project" align="center">
-                    <asp:Image ID="Image1" runat="server" ImageUrl="~/images/addproject.jpg" Height="20px" Width="40px" />
-                    <asp:LinkButton ID="add_project" runat="server">Add Project</asp:LinkButton>
+                    <asp:Image ID="imgaddproject" runat="server" ImageUrl="~/images/addproject.jpg"  />
+                    <asp:LinkButton ID="add_project" OnClick="add_project_Click" runat="server">Add Project</asp:LinkButton>
                 </div>
                 <div id="search">
-                    <asp:TextBox ID="textbox1" ClientIDMode="Static"  runat="server"></asp:TextBox>
-           <asp:Button ID="btn_search" ClientIDMode="Static" Text="Search" runat="server" OnClientClick="btn_search"  />
+                    <asp:TextBox ID="txtsearch" ClientIDMode="Static"  runat="server"></asp:TextBox>
+                     <asp:Button ID="btn_search" ClientIDMode="Static" Text="Search" runat="server" OnClientClick="btn_search" OnClick="btn_search_Click" />
                       <div class="suggestions">              
-                        </div>
+                       </div>
                 </div>
             </div>
             <div id="project_gridview">
-            <asp:GridView ID="dtgproject" runat="server" AutoGenerateColumns="False"  DataKeyNames="id"  DataSourceID="sqldatasource" 
+               
+                <asp:Label runat="server"  CssClass="projectwelcome" ID="lblwelcome1" Text="Welcome to Invoice management System Please go to Add Project" Visible="false"></asp:Label>                 
+                    
+            <asp:GridView ID="dtgproject" runat="server" AutoGenerateColumns="False"  DataKeyNames="id" PageSize="7"  
                 AllowPaging="True"
                 BackColor="White"
                 BorderColor="#CC9966"
                 BorderStyle="None"
                 BorderWidth="1px"
-                CellPadding="4"  OnRowCommand="GridView3_RowCommand">
+                CellPadding="4"  OnRowCommand="GridView3_RowCommand" OnPageIndexChanging="dtgproject_PageIndexChanging">
              <FooterStyle BackColor="#FFFFCC" ForeColor="#000009" />
              <RowStyle BackColor="White" ForeColor="#000099" />
              <SelectedRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="#663399" /> <PagerStyle BackColor="#FFFFCC" ForeColor="#330099" HorizontalAlign="Center"/>
              <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="#FFFFCC" />   
                  <Columns>
-                       <asp:TemplateField HeaderText="Project id" SortExpression="type">
+                       <asp:TemplateField HeaderText="Project Id" SortExpression="type">
                            <ItemTemplate>
-                               <asp:Label ID="lblsno" runat="server" Text='<%# Eval("id") %>' Width="30px"></asp:Label>
+                               <asp:Label ID="lblsno" runat="server" Text='<%# Eval("id") %>' Width="160px" Height="25px"></asp:Label>
                            </ItemTemplate>
                             </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Projectname" SortExpression="type">
+                        <asp:TemplateField HeaderText="Project Name" SortExpression="type">
                            <ItemTemplate>
-                               <asp:Label ID="lblprojectname" runat="server" Text='<%# (Eval("name").ToString())  %>' Width="300px"></asp:Label>
+                               <asp:LinkButton ID="lnkbtnedit" runat="server"  CommandName="Action"  CommandArgument='<%# Bind("id") %>' Text='<%# (Eval("name").ToString())  %>' Width="250px"></asp:LinkButton>  
                            </ItemTemplate>
-                          
+                            
                             </asp:TemplateField>
-                     <asp:TemplateField HeaderText="Total hours"  SortExpression="type">
+                     <asp:TemplateField HeaderText="Total Hours"  SortExpression="type">
                            <ItemTemplate>
-                               <asp:Label ID="lblstdate" runat="server" Text='<%# Eval("total_hours") %>' Width="100px"></asp:Label>
+                               <asp:Label ID="lblstdate" runat="server" Text='<%# Eval("total_hours") %>' Width="160px"></asp:Label>
                            </ItemTemplate>
                                                 </asp:TemplateField>
-                     <asp:TemplateField HeaderText="Complited hours" SortExpression="type">
+                     <asp:TemplateField HeaderText="Completed Hours" SortExpression="type">
                            <ItemTemplate>
-                               <asp:Label ID="lbleddate" runat="server" Text='<%# Eval("completedhours") %>' Width="100px"></asp:Label>                               
+                               <asp:Label ID="lbleddate" runat="server" Text='<%# Eval("completedhours") %>' Width="160px"></asp:Label>                               
                            </ItemTemplate>
                          
                        </asp:TemplateField>
-                     <asp:TemplateField HeaderText="Hourlyrate" SortExpression="type">
+                     <asp:TemplateField HeaderText="Hourly Rate" SortExpression="type">
                            <ItemTemplate>
-                               <asp:Label ID="lblhrate" runat="server" Text='<%# Eval("hourly_rate") %>' Width="100px"></asp:Label>                               
+                               <asp:Label ID="lblhrate" runat="server" Text='<%# Eval("hourly_rate") %>' Width="160px"></asp:Label>                               
                            </ItemTemplate>
                      </asp:TemplateField>
-                       <asp:TemplateField HeaderText="Total budget" SortExpression="type">
+                       <asp:TemplateField HeaderText="Total Budget" SortExpression="type">
                            <ItemTemplate>
-                               <asp:Label ID="lbltbgt" runat="server" Text='<%# Eval("total_budget") %>' Width="100px"></asp:Label>                             
+                               <asp:Label ID="lbltbgt" runat="server" Text='<%# Eval("total_budget") %>' Width="160px"></asp:Label>                             
                            </ItemTemplate>                         
                        </asp:TemplateField>
-                     <asp:TemplateField HeaderText="Complited budget" SortExpression="type">
+                     <asp:TemplateField HeaderText="Completed Budget" SortExpression="type">
                            <ItemTemplate>
-                               <asp:Label ID="lblcbgt" runat="server" Text='<%# Eval("totalpay") %>' Width="90px"></asp:Label>                             
+                               <asp:Label ID="lblcbgt" runat="server" Text='<%# Eval("totalpay") %>' Width="160px"></asp:Label>                             
                            </ItemTemplate>                      
-                       </asp:TemplateField>   
-                     <asp:TemplateField HeaderText="Invoice View" SortExpression="type">
-                           <ItemTemplate>
-                        <asp:LinkButton ID="lnbtnview" runat="server" Text="View" width="70px"></asp:LinkButton>      
-                           </ItemTemplate>
-                       </asp:TemplateField>                                 
-                      <asp:TemplateField HeaderText="Edit" SortExpression="type">
-                           <ItemTemplate>
-                              <asp:LinkButton ID="lnkbtnedit" runat="server"  Text="Edit"  CommandName="Action"  CommandArgument='<%# Bind("id") %>' Width="70px"></asp:LinkButton>                              
-                           </ItemTemplate>
-                       </asp:TemplateField>
-                     <asp:TemplateField HeaderText="Delete" SortExpression="type">
-                           <ItemTemplate>
-                               <asp:LinkButton ID="lnkbtndelete" runat="server" Text="delete" width="70px"></asp:LinkButton>                        
-                           </ItemTemplate>
-                       </asp:TemplateField>
-                      
+                       </asp:TemplateField>                                                          
                    </Columns>
             </asp:GridView>
               
-                 <asp:SqlDataSource runat="server" ID="sqldatasource" ConnectionString="Data Source=AMX-504-PC;Initial Catalog=sample;Integrated Security=True" SelectCommand="Select e.id, e.name, e.total_hours, e.hourly_rate, e.total_budget,e.project_status,s.completedhours,s.totalpay From project e LEFT JOIN invoice_details s on e.id = project_id where e.project_status=1 " FilterExpression="name LIKE  '%{0}%'">
-                   <FilterParameters>
-                        <asp:ControlParameter Name="name" ControlID="textbox1" PropertyName="Text" />
-                        </FilterParameters>
-               </asp:SqlDataSource>
                 </div>
         </div>
         <div id="barchart">
@@ -125,8 +112,8 @@
             </div>
             <asp:Chart ID="MobileSalesChart" runat="server" Width="300px" Height="300px" ToolTip="Project Details" BorderlineColor="Gray">
                 <Series>
-                    <asp:Series Name="samsung" IsValueShownAsLabel="true" ChartType="StackedColumn" LegendText="complitedhrs"></asp:Series>
-                    <asp:Series Name="nokia" IsValueShownAsLabel="true" ChartType="StackedColumn" LegendText="Remaining hrs"></asp:Series>
+                    <asp:Series Name="completed" IsValueShownAsLabel="true" ChartType="StackedColumn" LegendText="complitedhrs"></asp:Series>
+                    <asp:Series Name="pending" IsValueShownAsLabel="true" ChartType="StackedColumn" LegendText="Remaining hrs"></asp:Series>
                 </Series>
                 <Legends>
                     <asp:Legend Name="projectdescription" Docking="Bottom" Title="project description" TableStyle="Wide" BorderDashStyle="Solid" BorderColor="#e8eaf1" TitleSeparator="Line" TitleFont="TimesNewRoman" TitleSeparatorColor="#e8eaf1">
@@ -144,20 +131,104 @@
         </div>
         <div id="pending_details">
            <div id="pending_heading" align="center">
-           <strong>Pending invoices</strong>
-              
-           </div>
+           <strong>Outstanding Invoices</strong>   
+                </div>
+            <div class="pendinggrid">
+            <asp:GridView ID="dtgpending" runat="server" AutoGenerateColumns="False"  DataKeyNames="project_id"  
+                AllowPaging="True"
+                BackColor="White"
+                BorderColor="#CC9966"
+                BorderStyle="None"
+                BorderWidth="1px"
+                CellPadding="4"  OnRowCommand="GridView3_RowCommand">
+             <FooterStyle BackColor="#FFFFCC" ForeColor="#000009"  />
+             <RowStyle BackColor="White" ForeColor="#000099" />
+             <SelectedRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="#663399" /> <PagerStyle BackColor="#FFFFCC" ForeColor="#330099" HorizontalAlign="Center"/>
+             <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="#FFFFCC" />   
+                 <Columns>
+                       <asp:TemplateField HeaderText="Project id" SortExpression="type">
+                           <ItemTemplate>
+                            
+                               <asp:Label ID="lblid" runat="server" Text='<%# Eval("project_id") %>' Width="30px"></asp:Label>
+                           </ItemTemplate>
+                            </asp:TemplateField>
+                      <asp:TemplateField HeaderText="Projectname" SortExpression="type">
+                           <ItemTemplate>
+                               <asp:Label ID="lblname" runat="server" Text='<%# Eval("name") %>' Width="30px"></asp:Label>
+                           </ItemTemplate>
+                            </asp:TemplateField>
+                      <asp:TemplateField HeaderText="Invoicenumber" SortExpression="type">
+                           <ItemTemplate>
+                               <asp:Label ID="lblno" runat="server" Text='<%# Eval("invoicenumber") %>' Width="30px"></asp:Label>
+                           </ItemTemplate>
+                            </asp:TemplateField>
+                      </Columns>
+                </asp:GridView>
+          <asp:Panel runat="server" ID="pnlpending" Visible="false" CssClass="projectwelcome2" ClientIDMode="Static">
+             <asp:Label runat="server"  ID="lblwelcome" Text="No Outstanding invoices " ></asp:Label>
+                </asp:Panel>
+        </div>
         </div>
         <div id="updated_details" align="center">
             <div id="update_heading">
-            <strong>Raised invoice</strong>
+            <strong>Raised invoices</strong>
             </div>
+            <div class="raisedgrid">
+            <asp:GridView ID="dtgraisedinvoice" runat="server" AutoGenerateColumns="False"  DataKeyNames="project_id"  
+                AllowPaging="True"
+                BackColor="White"
+                BorderColor="#CC9966"
+                BorderStyle="None"
+                BorderWidth="1px"
+                CellPadding="4"  OnRowCommand="GridView3_RowCommand" >
+             <FooterStyle BackColor="#FFFFCC" ForeColor="#000009" />
+             <RowStyle BackColor="White" ForeColor="#000099" />
+             <SelectedRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="#663399" /> <PagerStyle BackColor="#FFFFCC" ForeColor="#330099" HorizontalAlign="Center"/>
+             <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="#FFFFCC" />   
+                 <Columns>
+                       <asp:TemplateField HeaderText="Project id" SortExpression="type">
+                           <ItemTemplate>
+                            
+                               <asp:Label ID="lblid1" runat="server" Text='<%# Eval("project_id") %>' Width="30px"></asp:Label>
+                           </ItemTemplate>
+                            </asp:TemplateField>
+                      <asp:TemplateField HeaderText="Projectname" SortExpression="type">
+                           <ItemTemplate>
+                               <asp:Label ID="lblname1" runat="server" Text='<%# Eval("name") %>' Width="30px"></asp:Label>
+                           </ItemTemplate>
+                            </asp:TemplateField>
+                      <asp:TemplateField HeaderText="Invoicenumber" SortExpression="type">
+                           <ItemTemplate>
+                               <asp:Label ID="lblinvoiceno" runat="server" Text='<%# Eval("invoicenumber") %>' Width="30px"></asp:Label>
+                           </ItemTemplate>
+                            </asp:TemplateField>
+                      </Columns>
+                </asp:GridView>
+                
+                     <asp:Panel runat="server" ID="pnlraised" CssClass="projectwelcome1" ClientIDMode="Static" Visible="false">
+             <asp:Label runat="server" CssClass="projectwelcome1" ID="lblraisedinvoice" Text="Your Invoices are not yet Raised by the Finance team" ></asp:Label>
+                </asp:Panel>
+                  </div>       
+        
         </div>
     </div>
               </ContentTemplate>
         <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="dwnproject" EventName="SelectedIndexChanged" />
+            <asp:AsyncPostBackTrigger ControlID="ddldwnproject" EventName="SelectedIndexChanged" />
         </Triggers>
     </asp:UpdatePanel>
+    <script type="text/javascript">
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+        prm.add_pageLoaded(registerMethods);
+        function registerMethods() {
+            registerStartup1();
+        }
+  
+       function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+
+    </script>
+ 
 </asp:Content>
 
