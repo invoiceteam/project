@@ -1,0 +1,59 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+
+public partial class Default2 : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!Page.IsPostBack)
+        {
+            BindData();
+        }
+    }
+    public void BindData()
+    {
+        SqlDataAdapter da;
+        SqlConnection con;
+        DataSet ds = new DataSet();
+
+
+        if (ConfigurationManager.ConnectionStrings != null)
+        {
+            con = new SqlConnection(ConfigurationManager.ConnectionStrings["connect"].ConnectionString);
+            SqlDataAdapter sda = new SqlDataAdapter();
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand("select * from StudentRecord");
+
+            //cmd.CommandType = CommandType.StoredProcedure;
+
+            //cmd.Parameters.AddWithValue("@Filter", ViewState["Filter"].ToString());
+
+            cmd.Connection = con;
+
+            sda.SelectCommand = cmd;
+
+            sda.Fill(dt);
+
+            GridView1.DataSource = dt;
+
+            GridView1.DataBind();
+        }
+    }
+
+    protected void DropDownList1_SelectedIndexChanged1(object sender, EventArgs e)
+    {
+        String qry = "select * from StudentRecord where stId=" + DropDownList1.SelectedValue;
+        SqlDataAdapter adp = new SqlDataAdapter(qry, ConfigurationManager.ConnectionStrings["connect"].ConnectionString);
+        DataSet ds = new DataSet();
+        adp.Fill(ds);
+        GridView1.DataSource = ds;
+        GridView1.DataBind();
+    }
+}

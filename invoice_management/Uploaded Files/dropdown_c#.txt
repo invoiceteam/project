@@ -1,0 +1,58 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+
+public partial class dropdown : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!Page.IsPostBack)
+        {
+            BindData();
+        }
+    }
+    public void BindData()
+    {
+        SqlDataAdapter da;
+        SqlConnection con;
+        DataSet ds = new DataSet();
+
+
+        if (ConfigurationManager.ConnectionStrings != null)
+        {
+            con = new SqlConnection(ConfigurationManager.ConnectionStrings["connect"].ConnectionString);
+           // SqlDataAdapter sda = new SqlDataAdapter();
+           // DataTable dt = new DataTable();
+           string cmd = "select * from state";
+
+            SqlDataAdapter adpt = new SqlDataAdapter(cmd, con);
+            DataTable dt = new DataTable();
+            adpt.Fill(dt);
+            DropDownList1.DataSource = dt;
+            DropDownList1.DataBind();
+            DropDownList1.DataTextField = "state";
+            DropDownList1.DataValueField = "state";
+            DropDownList1.DataBind();
+
+           
+        }
+    }
+    protected void DropDownList1_SelectedIndexChanged1(object sender, EventArgs e)
+    {
+        String qry = "select * from state  where id=" + DropDownList2.SelectedValue;
+        SqlDataAdapter adpt = new SqlDataAdapter(qry, ConfigurationManager.ConnectionStrings["connect"].ConnectionString);
+        DataTable dt = new DataTable();
+        adpt.Fill(dt);
+        DropDownList1.DataSource = dt;
+        DropDownList1.DataBind();
+        DropDownList1.DataTextField = "state";
+        DropDownList1.DataValueField = "state";
+        DropDownList1.DataBind();
+    }
+}

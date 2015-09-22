@@ -1,0 +1,34 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Web.UI.DataVisualization.Charting;
+
+    public partial class Default : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            DataSet ds = new DataSet("pchart");
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["connect"].ConnectionString);
+            SqlDataAdapter dataAdapter = new SqlDataAdapter("Select * from pchart", con);
+            con.Open();
+            dataAdapter.Fill(ds);
+            con.Close();
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+
+                    MobileSalesChart.Series["samsung"].Points.Add(new DataPoint(i, ds.Tables[0].Rows[i]["Totalhours"].ToString().Trim()));
+                    MobileSalesChart.Series["nokia"].Points.Add(new DataPoint(i, ds.Tables[0].Rows[i]["remainghours"].ToString().Trim()));
+                   // MobileSalesChart.Series["htc"].Points.Add(new DataPoint(i, ds.Tables[0].Rows[i]["htc"].ToString().Trim()));
+                    MobileSalesChart.Series[0].Points[i].AxisLabel = ds.Tables[0].Rows[i]["project"].ToString().Trim();
+                }
+            }
+        }
+    }

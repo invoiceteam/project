@@ -1,0 +1,633 @@
+﻿body {
+      background:#f1f1f1;
+}
+*
+{
+    padding:0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+  
+}
+#header
+{
+    
+    height:90px;
+    background:#2f7782;
+}
+/*footer start*/
+#footer1
+{
+    
+    height:30px;
+    background:#2f7782;
+}
+.foot
+{
+    text-align:center;
+    color:white;
+}
+/*end footer*/
+form
+{
+    width:1300px;
+    margin:0 auto;
+    background-color:#ffffff;
+}
+div img
+{
+    height:40px;
+    float:left;
+    margin:16px 0 0 51px ;
+}
+#Image1
+{
+       height:40px;
+    float:left;
+    margin:19px 30px ;
+
+}
+div h1
+{
+    margin-top:30px;
+    position:absolute;
+    margin-left:490px;
+    font-size:24px;
+    color:#fff;
+}
+   .auto-style1
+        {
+            height: 43px;
+        }
+        .auto-style2
+        {
+            height: 45px;
+        }
+.auto-style3
+        {
+            width: 175px;
+        }
+        .auto-style5
+        {
+            width: 262px;
+        }
+#login_form
+{
+   margin: 81px 301px;
+    width: 700px;
+    height: 402px;
+    background-color:#f1f1f1;
+    
+}
+#login_form h3
+{
+    padding:20px;
+    font-size:30px;
+}
+#login_form table
+{
+    margin-left:200px;
+}
+.tabl table
+{
+    
+    padding:20px 60px ;
+    width:900px; 
+    border:groove;
+    background-color:#f1f1f1;
+    margin:0 auto;
+}
+
+    .tabl 
+    {
+       margin-top:30px;
+       margin-bottom:30px;
+     
+    }
+input[type=text], .drop1,input[type=email],input[type=date]
+{
+    border-radius:5px;
+    width:190px;
+    height: 26px;
+}
+textarea
+{
+    resize:none;
+    width:190px;
+}
+#tbl1 tr
+{
+   height:45px;
+}
+.csl
+{
+    float:left;
+}
+#tbl1 tr th
+{
+    font-size:25px;
+    height:70px;
+}
+html body div#ui-datepicker-div.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all
+{
+      display: block;
+    left: 517.783px;
+    position: absolute;
+    
+    top: 691px;
+    width: 285px;
+    z-index: 1;
+}
+html body div#ui-datepicker-div.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all
+{
+    display:none;
+}
+    html body div#ui-datepicker-div.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all table.ui-datepicker-calendar thead tr th span, html body div#ui-datepicker-div.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all table.ui-datepicker-calendar tbody tr td a.ui-state-default
+    {
+        font-size:14px;
+    }
+    html body div#ui-datepicker-div.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all table.ui-datepicker-calendar tbody tr td a.ui-state-default
+    {
+         background: #e6e6e6 url("images/ui-bg_glass_75_e6e6e6_1x400.png") repeat-x scroll 64% 96%;
+    border: 1px solid #d3d3d3;
+    color: #555555;
+    font-weight: normal;
+    padding: 3px;
+    width: 26px;
+    }
+    
+td img {
+    margin-top:0px;
+    float: left;
+    height: 29px;
+    
+}
+.pick1, .pick, .thours
+{
+    float:left;
+}
+.fileedit
+{
+    margin:0;
+}
+.add
+{
+    margin:0;
+    padding:0;
+}
+#anc_add
+{
+    width:150px;
+}
+#btnback
+{
+       float: left;
+    margin-left: 30px;
+    width: 78px;
+    height:25px;
+    border-radius: 41px;
+    background-color:#f6f3f3;
+    margin-top: 6px;
+}
+/*start grid dashboard*/
+.pendinggrid
+{
+   padding-top:40px;
+   padding-left:60px;
+ 
+}
+.raisedgrid
+{
+   padding-top:40px;
+}
+.projectwelcome
+{
+    text-shadow:10px;
+    margin:80px 300px;
+   color:#a70559;
+   text-align:center;
+    font-size:30px;
+    width:550px;
+}
+.projectwelcome2
+{
+    text-shadow:10px;
+   padding-top: 110px;
+
+color:#a70559;
+  text-align:center;
+    font-size:20px;
+    width:291px;
+}
+.projectwelcome1
+{
+    text-shadow:10px;
+   padding-top: 80px;
+margin-left: 0px;
+color:#a70559;
+  text-align:center;
+    font-size:20px;
+    width:300px;
+}
+.noinvoicecss
+{
+  color:#a70559;
+ text-align:center;
+ font-size:30px;
+}
+/*end grid dashboard*/
+#signup_form
+{
+    
+    margin:75px 300px;
+    width: 791px;
+    height: 490px;
+    background-color:#f1f1f1;
+}
+#signup_form h3
+{
+    padding:20px;
+    font-size:30px;
+}
+#content_recovery
+{
+    margin: 150px 300px;
+width: 579px;
+height: 200px;
+background-color: #F1F1F1;
+padding: 64px;
+    
+}
+#fdashboard_layout
+{
+    height:523px;
+    border-style:groove;
+}
+#dashboard_layout
+{
+    height:900px;
+    border-style:groove;
+}
+#dashboard_setting
+{
+    height:30px;
+    /*margin-top:20px;*/
+    /*border-style:dashed;*/
+}
+#lnkbtnedit
+{
+    text-decoration:underline;
+}
+#delete
+{
+    margin-left: 863px;
+        margin-top: 6px;
+    float:left;
+    height:20px;
+    width:50px;
+}
+#deletedash
+{
+    margin-left: 982px;
+        margin-top: 6px;
+    float:left;
+    height:20px;
+    width:50px;
+}
+#btnenhancement
+{
+    margin-left:0px;
+}
+#setting
+{
+   margin-left: 47px;
+   margin-top: 7px;
+   height:20px;
+   /*width:50px;*/
+   float:left;
+   /*border-style:groove;*/
+}
+#logout
+{
+    margin-left:20px;
+    margin-top: 7px;
+    height:20px;
+    width:50px;
+    padding:2px;
+    float:left;
+}
+#project_details
+{
+    width:1240px;
+    height:350px;
+    margin-left:25px;
+    margin-top: 10px;
+    float:left;
+    border-style:groove;
+    border-radius:12px;
+}
+#hours
+{
+    width:300px;
+    height:100px;
+    float:left;
+    margin-left:25px;
+    border-style:groove;
+    border-radius:12px;
+}
+#budget
+{
+    width:300px;
+    height:100px;
+    float:left;
+    margin-left:630px;
+    border-style:groove;
+    border-radius:12px;
+}
+#barchart
+{
+   float:left;
+   width:380px;
+   height:350px;
+   margin-top:10px;
+   margin-left:25px;
+   border-style:groove;
+   border-radius:12px;
+}
+#pending_details
+{
+   float:left;
+   width:400px;
+   height:350px;
+   margin-top:10px;
+   margin-left:25px;
+   border-style:groove;
+   border-radius:12px;
+}
+#updated_details
+{
+ float:left;
+ width:400px;
+ margin-top:10px;
+ margin-left:25PX;
+ height:350px;
+ border-style:groove;
+ border-radius:12px;
+}
+#MobileSalesChart
+{
+    padding:0px;
+    margin:0px;
+}
+#project_settings
+{
+    height:40px;
+    border-style:groove;
+}
+#project_heading
+{
+    height:20px;
+    color:teal;
+    text-align:center;
+    background-color:#cccccc;
+}
+#chart_heading
+{
+    height:20px;
+    background-color:#cccccc;
+}
+#pending_heading
+{
+    height:20px;
+    background-color:#cccccc;
+}
+#update_heading
+{
+    height:20px;
+    background-color:#cccccc;
+}
+#sort_dropdown
+{
+    float:left;
+    margin:8px 6px;
+    /*width:170px;*/
+    height:20px;
+    /*border-style:groove;*/
+}
+#gridview_finance
+{
+    margin-left:20px;
+margin-top: 30px;
+}
+#project_gridview
+{ 
+  margin: 36px 12px;
+ }
+#new_project
+{
+    float:left;
+    margin-left:327px;
+    margin-top:8px;
+    width:190px;
+    height:20px;
+    /*border-style:groove;
+    border-radius:12px;*/
+}
+    #new_project img
+    {
+        margin: 0px 0px 0px 36px;
+        height:24px;
+        width:51px;
+    }
+#search
+{
+    float:right;
+    margin:8px 8px;
+    width:283px;
+    height:24px;
+    /*border-style:groove;*/
+}
+.suggestions
+{
+    position:absolute;
+}
+.suggestions a
+    {
+    float: right;
+    margin: 4px 6px;
+    width: 253px;
+    height: 24px;
+    background-color: #fff;
+    cursor: pointer;
+    border: 1px solid #A52A2A;
+    float: right;
+    margin: 1px 0 0 -3px;
+    width: 195px;
+    height: auto;
+    word-wrap: break-word;
+    }
+
+
+/*start settings*/
+
+.tab
+{
+    padding-top:10px;
+}
+    .tab td
+    {
+        width:69px;
+        height:39px;
+
+    }
+
+.setting
+{
+   
+    max-width:800px;
+    width:100%;
+   
+    background-color:#f1f1f1;
+    margin:0 auto;
+    
+}
+    .setting input[type=button]
+    {
+        float:right;
+    }
+.settingtop #imbback
+{
+    margin:10px 0 0 20px;
+    float:left;
+}
+.settingtop
+{
+    height:50px;
+    background-color:#808080;
+}
+.settingtop h2
+{
+    padding-top:10px;
+
+}
+h2
+{
+    text-align:center;
+}
+.align
+{
+    margin:50px;
+}
+.pwd
+{
+    padding:30px;
+}
+.buttan
+{
+    margin-left:205px;
+    width:80px;
+}
+#label1,#label2,#label3,#label4
+{
+    font-size:20px;
+}
+/*End settings*/
+#newinvoice,#editinvoice
+{
+    font-family:'Times New Roman';
+    width:450px;
+    margin:30px auto;
+    padding:5px;
+    background-color:#D8D8D8 ;
+}
+    #newinvoice h3,#editinvoice h3
+    {
+         padding:20px;
+    }
+.currentgrid
+{
+    margin:20px;
+}
+#current
+{
+   width:95%;
+   margin:40px;
+   height:500px;
+   border:1px solid teal;
+   border-radius:3px;
+}
+#GridView1
+{
+    margin:10px auto;
+    width:100%;
+}
+.gridpaging a
+{
+    margin:15px;
+}
+#currentproject
+{
+    width:auto;
+    height:44px;
+    margin-left:25px;
+    margin-top:10px;
+    color:teal;
+}
+.style
+{
+    color:teal;
+    font-family:Arial;
+    font-size:20px;
+}
+#change_password
+{
+    margin:100px 400px;
+    padding:90px;
+    width:350px;
+    height:233px;
+    background-color:#f1f1f1;
+}
+
+/*Abort page*/
+#logout-abandant
+{
+    float:right;
+    margin:10px;
+    margin-right:30px;
+}
+#abandant-projects
+{
+    margin:20px;
+}
+.abandant-back
+{
+    float:right;
+    width:150px;
+    height : 35px;
+    margin-right:35px;
+    margin-top:10px;
+    font-size:15px;
+}
+#btnabort1
+{
+    float:left;
+    margin-left: 17px;
+margin-top: 6px;
+}
+#btnabort
+{
+    height: 25px;
+    border-radius: 9px;
+    width: 157px;
+    background-color:white;
+}
+.btnstyle,#btnsubmit,#btntech,#btnremovetech,#btntype,#btnremovetype,#addperiodinvoice,#removepinvoice
+{
+    width: 78px;
+    height:25px;
+    background-color:#f6f3f3;
+    border-radius: 41px;
+    /*background-color: white;*/
+
+}
+/**//**//**//**//**//**//**//**/
